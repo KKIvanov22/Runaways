@@ -3,44 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles/login.css">
+    <title>LoginAndRegister</title>
+    <link rel="stylesheet" href="styles/Login-register.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-toggle">
-            <button id="loginBtn" class="active">Login</button>
-            <button id="registerBtn">Register</button>
+    <div class="container" id="container">
+        <div class="form-container register-container">
+            <form action="#">
+                <h1>Create Account</h1>
+                <br>
+                <input type="text" placeholder="Enter your Name" />
+                <input type="email" placeholder="Enter your Email" />
+                <input type="password" placeholder="Enter your Password" />
+                <input type="password" placeholder="Confirm Password" /> <!--- to do: eye icon --->
+                <br>
+                <button>Register</button>
+            </form>
         </div>
-        <div class="forms">
-            <form id="loginForm" class="form active">
-                <h2>Login</h2>
-                <label for="loginEmail">Email</label>
-                <input type="email" id="loginEmail" name="email" required>
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" name="password" required>
-                <button type="submit">Login</button>
+        <div class="form-container log-in-container">
+            <form action="#">
+                <img src="images/pencil-rotated.png">
+                
+                <h1>Log in</h1>
+                <h3>Sing in your account</h3>
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <a href="#">Forgot your password?</a> <!--- to do --->
+                <button>Log In</button>
             </form>
-            <form id="registerForm" class="form">
-                <h2>Register</h2>
-                <label for="registerName">Name</label>
-                <input type="text" id="registerName" name="name" required>
-                <label for="registerEmail">Email</label>
-                <input type="email" id="registerEmail" name="email" required>
-                <label for="registerPassword">Password</label>
-                <input type="password" id="registerPassword" name="password" required>
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-                <label for="userType">I am a</label>
-                <select id="userType" name="userType" required>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="administrator">Administrator</option>
-                </select>
-                <button type="submit">Register</button>
-            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <img src="images/feather.png">
+                    <h1>Doma6no</h1>
+                    <p>Create an Account! Log In. And start working on your Homework!</p>
+                    <button class="transparent" id="signIn">Log In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <img src="images/feather.png">
+                    <br>
+                    <h1>Doma6no</h1>
+                    <p>Excited to do your Homework? Enter your Email and Password. Let's Log In!</p>
+                    <button class="transparent" id="signUp">Register</button>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="scripts/login.js"></script>
+    <script src="scripts/Login-register.js"></script>
 </body>
 </html>
