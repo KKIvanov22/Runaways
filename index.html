@@ -9,27 +9,26 @@
 <body>
     <div class="container" id="container">
         <div class="form-container register-container">
-            <form action="#">
+            <form id="register-form">
                 <h1>Create Account</h1>
                 <br>
-                <input type="text" placeholder="Enter your Name" />
-                <input type="email" placeholder="Enter your Email" />
-                <input type="password" placeholder="Enter your Password" />
-                <input type="password" placeholder="Confirm Password" /> <!--- to do: eye icon --->
+                <input type="text" placeholder="Enter your Name" required />
+                <input type="email" placeholder="Enter your Email" required />
+                <input type="password" placeholder="Enter your Password" required />
+                <input type="password" placeholder="Confirm Password" required />
                 <br>
-                <button>Register</button>
+                <button type="submit">Register</button>
             </form>
         </div>
         <div class="form-container log-in-container">
-            <form action="#">
+            <form id="login-form">
                 <img src="images/pencil-rotated.png">
-                
                 <h1>Log in</h1>
-                <h3>Sing in your account</h3>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a> <!--- to do --->
-                <button>Log In</button>
+                <h3>Sign in to your account</h3>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <a href="#">Forgot your password?</a>
+                <button type="submit">Log In</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -51,5 +50,6 @@
         </div>
     </div>
     <script src="scripts/Login-register.js"></script>
+    <script src="scripts/auth.js"></script>
 </body>
 </html>
