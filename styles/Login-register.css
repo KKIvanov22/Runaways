@@ -208,6 +208,21 @@ input {
 	height: 40px;
 	width: 40px;
 }
+/* Toggle password */
+.password-container {
+	position: relative;
+	display: inline-block;
+}
+.password-field {
+	padding-right: 100px;
+}
+.toggle-icon {
+	position: absolute;
+	right: 10px;
+	top: 45%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
 
 @keyframes show {
 	0%, 49.99% {
@@ -220,3 +235,4 @@ input {
 		z-index: 5;
 	}
 }
+

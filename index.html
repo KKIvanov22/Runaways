@@ -14,8 +14,14 @@
                 <br>
                 <input type="text" placeholder="Enter your Name" class="js-input-register-name"/>
                 <input type="email" placeholder="Enter your Email" class="js-input-register-email"/>
-                <input type="password" placeholder="Enter your Password" class="js-input-register-password"/>
-                <input type="password" placeholder="Confirm Password" class="js-input-register-password-repeat"/> <!--- to do: eye icon --->
+                <div class="password-container">
+                    <input type="password" id="password-field-Register" placeholder="Enter your Password" class="password-field js-input-register-password">
+                    <span class="toggle-icon" onclick="togglePasswordVisibilityRegister()">👁️‍🗨️</span>
+                </div>
+                <div class="password-container">
+                    <input type="password" id="password-field-Register-Confirm" placeholder="Confirm Password" class="password-field js-input-register-password-repeat">
+                    <span class="toggle-icon" onclick="togglePasswordVisibilityRegisterComfirm()">👁️‍🗨️</span>
+                </div>
                 <div class="allert-message-register"></div>
                 <br>
                 <button class="js-button-register">Register</button>
@@ -28,8 +34,12 @@
                 <h1>Log in</h1>
                 <h3>Sing in your account</h3>
                 <input type="email" placeholder="Email" class="js-input-log-in-email"/>
-                <input type="password" placeholder="Password" class="js-input-log-in-password"/>
-                <div class="allert-message-log-in"></div>
+                <div class="password-container">
+                    <input type="password" id="password-field-log-in" placeholder="Password" class="password-field js-input-log-in-password">
+                    <span class="toggle-icon" onclick="togglePasswordVisibilityLogIn()">👁️‍🗨️</span>
+                </div>
+
+
                 <a href="#">Forgot your password?</a> <!--- to do --->
                 <button class="js-button-log-in">Log In</button>
             </form>

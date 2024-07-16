@@ -5,6 +5,47 @@ const container = document.getElementById('container');
 signUpButton.addEventListener('click', () => {container.classList.add('right-panel-active');});
 signInButton.addEventListener('click', () => {container.classList.remove('right-panel-active');});
 
+function togglePasswordVisibilityLogIn() {
+    const passwordField = document.getElementById('password-field-log-in');
+    const toggleIcon = document.querySelector('.toggle-icon');
+    checkPasswordType(passwordField,toggleIcon);
+}
+function togglePasswordVisibilityRegister() {
+    const passwordField = document.getElementById('password-field-Register');
+    const toggleIcon = document.querySelector('.toggle-icon');
+    checkPasswordType(passwordField,toggleIcon);
+}
+function togglePasswordVisibilityRegisterComfirm() {
+    const passwordField = document.getElementById('password-field-Register-Confirm');
+    const toggleIcon = document.querySelector('.toggle-icon');
+    checkPasswordType(passwordField,toggleIcon);
+}
+
+function checkPasswordType(passwordField,toggleIcon){
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.textContent = '👁️‍🗨️';
+    } else {
+        passwordField.type = 'password';
+        toggleIcon.textContent = '👁️‍🗨️';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let logInEmailElement =document.querySelector(".js-input-log-in-email");
 let logInPasswordElement =document.querySelector(".js-input-log-in-password");
 
