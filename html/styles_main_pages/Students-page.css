@@ -192,6 +192,28 @@
     column-gap: 10px;
     
   }
+
+  .img-overview{
+    width: 30px;
+    margin-right: 22px;
+    align-items: center;
+    aspect-ratio: 1/1;
+    
+  }
+  .img-homework{
+    width: 30px;
+    margin-right: 15px;
+    align-items: center;
+    aspect-ratio: 1/1;
+    
+  }
+  .img-settings{
+    width: 30px;
+    margin-right: 17px;
+    align-items: center;
+    aspect-ratio: 1/1;
+    
+  }
   
   .image-container {
     position: relative;
