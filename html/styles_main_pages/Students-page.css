@@ -187,7 +187,7 @@
   
   .activity-container {
     display: grid;
-    grid-template-columns: repeat(1, 900px);
+    grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(3, 120px);
     column-gap: 10px;
     
@@ -216,6 +216,7 @@
   }
   
   .image-container {
+    align-items: center;
     position: relative;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -723,8 +724,9 @@
     }
   
     .activity-container {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 150px);
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(3, 120px);
+    
     }
   
     .img-three {
@@ -785,8 +787,9 @@
     }
   
     .activity-container {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 150px);
+      grid-template-columns: repeat(1,1fr);
+      grid-template-rows: repeat(3, 120px);
+
     }
   
     .img-three {
@@ -842,4 +845,10 @@
     .classes {
       display: none;
     }
+  }
+
+  /* Active pannels */
+
+  .panel-active{
+    display: none;
   }
