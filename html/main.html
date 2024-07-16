@@ -3,9 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Students</title>
+    <link rel="stylesheet" href="Students-page.css">
 </head>
 <body>
-    <h1>Hello world</h1>
+    <main>
+      <nav class="main-menu">
+        <h1>Doma6no</h1>
+        <!---<img class="logo"  src=""- alt="" /> //To do: logo url--->
+        <ul>
+          <li class="nav-item active">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-house nav-icon"></i>
+              <span class="nav-text">Overview</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-user nav-icon"></i>
+              <span class="nav-text">Homework</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-calendar-check nav-icon"></i>
+              <span class="nav-text">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="content">
+        <div class="left-content">
+          <div class="assignments">
+            <h1>Assignments</h1>
+            <div class="activity-container">
+              
+              
+
+              <!-- <div class="image-container img-three">
+                <img src="" />
+                <div class="overlay">
+                  <h3>Homework 3</h3>
+                </div>
+              </div>-->
+            </div>
+          </div>
+
+          <div class="left-bottom">
+            <div class="weekly-schedule">
+              <h1>Weekly Schedule</h1> <!--- shows last 4 due assignments --->
+              <div class="calendar">
+                <div class="day-and-activity activity-assignments">
+                  <div class="day">
+                    <h1>date</h1>
+                    <p>Month</p>
+                  </div>
+                  <div class="activity">
+                    <h2>Due: Assignment1</h2>
+                  </div>
+                  <button class="btn">Open</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="personal-bests">
+              <h1>Personal Bests</h1>
+              <div class="personal-bests-container">
+                <div class="best-item box-one">
+                  <p>Best assignment score</p>
+                  <img src=""/> <!---  image --->
+                </div>
+                <div class="best-item box-two">
+                  <p>Highest assignment score</p>
+                  <img src=""/><!---  image --->
+                </div>
+                <div class="best-item box-three">
+                  <p>Assignments compleated: number</p>
+                  <img src=""/><!---  image --->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-content">
+          <div class="user-info">
+            <div class="icon-container">
+              <i class="fa fa-bell nav-icon"></i>
+              <i class="fa fa-message nav-icon"></i>
+            </div>
+            <h4>User.name</h4>
+            <img src="" alt="user" /> <!--- blank user photo --->
+          </div>
+
+          <div class="assignments-compleated">
+            <h1 style="align-self: flex-start">Assignments Compleated</h1>
+            <div class="assignments-compleated-container">
+              <div class="box" style="--i: 60%">
+                <div class="circle">
+                  <h2>60<small>%</small></h2> <!--- percentage = --->
+                </div>
+              </div>
+              <div class="assignments-compleated-content">
+                <p><span>Today:</span> smth</p>
+                <p><span>This Week:</span> smth</p>
+                <p><span>This Month:</span> smth</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="classes">
+            <h1>Classes</h1>
+            <div class="card-container">
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="" alt="" /><!-- Teachers profile image-->
+                  <h2>Teachers.name</h2>
+                </div>
+                
+                <p>Information about class</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+      <script src="Students-page.js"></script>
 </body>
 </html>
