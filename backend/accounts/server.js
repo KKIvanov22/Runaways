@@ -67,7 +67,7 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-        res.json({ message: 'Login successful', token, redirectUrl: '/html/main.html' }); // Include redirectUrl
+        res.json({ message: 'Login successful', token, redirectUrl: '/frontend/html/main.html' }); // Include redirectUrl
     } catch (error) {
         console.error('Error during login:', error);
         res.status(400).json({ message: error.message });
