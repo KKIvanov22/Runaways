@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const registerData = JSON.stringify({ name, email, password, confirmPassword });
 
-                console.log('Register data:', registerData); // Debug log
-
                 const response = await fetch('http://localhost:5501/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -25,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 alert(result.message);
             } catch (error) {
-                console.error('Error during registration:', error); // Debug log
+                console.error('Error during registration:', error);
             }
         });
     } else {
-        console.error('Register form not found'); // Debug log
+        console.error('Register form not found');
     }
 
     if (loginForm) {
@@ -42,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const loginData = JSON.stringify({ email, password });
 
-                console.log('Login data:', loginData); // Debug log
-
                 const response = await fetch('http://localhost:5501/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -53,18 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const result = await response.json();
                     alert(result.message);
+                    
+                    localStorage.setItem('token', result.token);
                     if (result.redirectUrl) {
-                        window.location.href = result.redirectUrl; // Redirect to the URL provided by the server
+                        window.location.href = result.redirectUrl; 
                     }
                 } else {
                     const errorResult = await response.json();
                     alert(errorResult.message);
                 }
             } catch (error) {
-                console.error('Error during login:', error); // Debug log
+                console.error('Error during login:', error);
             }
         });
     } else {
-        console.error('Login form not found'); // Debug log
+        console.error('Login form not found');
     }
 });
