@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const result = await response.json();
                     alert(result.message);
                     
-                    localStorage.setItem('token', result.token);
+                    document.cookie = `token=${result.token}; path=/`;
+                    document.cookie = `userId=${result.userId}; path=/`;
+
                     if (result.redirectUrl) {
                         window.location.href = result.redirectUrl; 
                     }

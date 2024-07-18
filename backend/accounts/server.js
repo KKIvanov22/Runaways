@@ -5,16 +5,17 @@ const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 5501;
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors());
 
 const JWT_SECRET = process.env.JWT_SECRET || 'OTADEKTDySgCdhpbVMlb'; 
 
-// Middleware to serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 const uri = 'mongodb+srv://Runaways:Run12345@accounts-runaways.eddsdhc.mongodb.net/?retryWrites=true&w=majority&appName=Accounts-runaways';
@@ -67,7 +68,9 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-        res.json({ message: 'Login successful', token, redirectUrl: '/frontend/html/main.html' }); // Include redirectUrl
+        res.cookie('userId', user.id, { httpOnly: true });
+        res.cookie('token', token, { httpOnly: true });
+        res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/main.html' }); // Include redirectUrl and userId
     } catch (error) {
         console.error('Error during login:', error);
         res.status(400).json({ message: error.message });
@@ -75,7 +78,7 @@ app.post('/login', async (req, res) => {
 });
 
 const authMiddleware = (req, res, next) => {
-    const token = req.headers['authorization'];
+    const token = req.cookies.token;
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }
@@ -89,9 +92,22 @@ const authMiddleware = (req, res, next) => {
     });
 };
 
-// Example protected route
+
 app.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: 'This is a protected route', userId: req.userId, userRole: req.userRole });
+});
+
+app.get('/user-info', authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({ id: user.id, name: user.name, email: user.email });
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 app.listen(port, () => {
