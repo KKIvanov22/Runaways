@@ -45,7 +45,21 @@
         <div class="left-content">
           <div class="assignments">
             <h1>Assignments</h1>
-            <div class="activity-container js-auto-html-homeworks">       
+            <div class="activity-container assignments-list js-auto-html-homeworks">
+              
+              <container class="activity-container assignment image-container"> 
+                <div class="overlay">
+                 <div class="homework-information">
+                  <h3 class="homework-name">Homework: ${1assignments.name}</h3>
+                  <h3 class="homework-description">Description: ${assignments.description}</h3>
+                  <h3 class="class-name">Class: ${assignments.className}</h3>
+                  <button class="btn-homework">Open</button>
+                  <h3 class="homework-due-date">Due: ${assignments.dueDate}</h3>
+                </div>
+                </div>
+               </container>
+
+ 
             </div>
           </div>
 
