@@ -10,26 +10,48 @@ navItems.forEach((navItem, i) => {
 });
 
 let assignmentsHTML = '';
-//Backend: A list of assingments is required with the following data for the last tree assingments that have been assingned to the student.
+//Backend: A list of assingments is required with the following data. The assignments have to be sorted by garde. Ant then by the date they were made, starting with the most recent one.
 let assignments = [
   {
     id: 1,
     name: "Assignment 1",
     className: "9a",
     description: "Something for description",
-    dueDate: "1/1/2001"
+    dueDate: "03",
+    dueMohth: "january",
+    dueYear: "2003"
   },{
     id: 2,
     name: "Assignment 2",
     className: "9b",
     description: "Something for description",
-    dueDate: "2/2/2002"
+    dueDate: "03",
+    dueMohth: "january",
+    dueYear: "2003"
   },{
     id: 3,
     name: "Assignment 3",
     className: "9c",
     description: "Something for description",
-    dueDate: "3/3/2003"
+    dueDate: "03",
+    dueMohth: "january",
+    dueYear: "2003"
+  },{
+    id: 4,
+    name: "Assignment 3",
+    className: "9c",
+    description: "Something for description",
+    dueDate: "03",
+    dueMohth: "january",
+    dueYear: "2003"
+  },{
+    id: 5,
+    name: "Assignment 3",
+    className: "9c",
+    description: "Something for description",
+    dueDate: "03",
+    dueMohth: "january",
+    dueYear: "2003"
   }];
 
   assignments.forEach((assignments)=>{
@@ -38,17 +60,17 @@ let assignments = [
     }
     else{
       assignmentsHTML += `
-      <container class="activity-container image-container"> 
-       <div class="overlay">
-        <div class="homework-information">
-         <h3 class="homework-name">Homework: ${assignments.name}</h3>
-         <h3 class="homework-date">Due: ${assignments.dueDate}</h3>
-         <h3 class="class-name">Class: ${assignments.className}</h3>
-         <button class="btn-homework">Open</button>
-         <h3 class="homework-description">Description: ${assignments.description}</h3>
-        </div>
-       </div>
-      </container>
+      <container class="activity-container assignment image-container"> 
+        <div class="overlay">
+          <div class="homework-information">
+            <h3 class="homework-name">Homework: ${assignments.name}</h3>
+            <h3 class="homework-description">Description: ${assignments.description}</h3>
+            <h3 class="class-name">Class: ${assignments.className}</h3>
+            <button class="btn-homework">Open</button>
+            <h3 class="homework-due-date">Due: ${assignments.dueDate} ${assignments.dueMohth} ${assignments.dueYear}</h3>
+                </div>
+                </div>
+               </container>
       `
       }
   });
