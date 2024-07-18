@@ -3,6 +3,7 @@
     --siteName:#ffffff;
     --mainMenuBackground1: #594bc2;
     --mainMenuBackground2: #5000ac;
+    --borderOutline1:#4c00ff;
   
   }
   
@@ -208,7 +209,7 @@
   }
 
   .assignments-list::-webkit-scrollbar-thumb {
-    background: #4c00ff;
+    background: var(--borderOutline1);
     border-radius: 10px;
     border: 2px solid #f1f1f1;
   }
@@ -246,21 +247,21 @@
     background: #ffffff;
     color: #484D53;
     margin-bottom: 10px;
-    border-left:double #4c00ff;
+    border-left:double var(--borderOutline1);
     border-radius: 10px;
     border-bottom-width: 5px;
     border-left-width: 5px;
-    border-color: #4c00ff;
+    border-color: var(--borderOutline1);
     color: #484d53; 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 6px 5px ;
   }
 
   .homework-information{
     display: grid;
-    max-width: 967px;
+    max-width: 1143px;
     max-height: 105px;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 50% 37% 13%;
+    grid-template-columns:37% 50%  13%;
     align-items: center;
     color: #484d53;
   }
@@ -268,16 +269,17 @@
     grid-row: 2/3;
     grid-column: 3/4;
     padding: 8px 24px;
-    margin-right: 10%;
+    margin-right: 15px;
+    justify-items:end;
     font-size: 1.1rem;
     font-weight: bold;
-    align-items: center;
+    align-items: end;
     outline: none;
     text-decoration: none;
     color: #484b57;
     background: rgb(255, 255, 255);
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid #4c00ff;
+    border: 1px solid var(--borderOutline1);
     border-style: double;
     border-radius: 25px;
     cursor: pointer;
