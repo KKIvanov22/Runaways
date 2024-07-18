@@ -37,10 +37,17 @@ const User = mongoose.model('User', UserSchema);
 app.post('/register', async (req, res) => {
     console.log('Received register request:', req.body);
     const { name, email, password, confirmPassword } = req.body;
+    
     if (password !== confirmPassword) {
         return res.status(400).json({ message: 'Passwords do not match' });
     }
+    
     try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email already exists' });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const lastUser = await User.findOne().sort({ id: -1 });
         const newId = lastUser ? lastUser.id + 1 : 1;
@@ -53,6 +60,7 @@ app.post('/register', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
 
 app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body);
