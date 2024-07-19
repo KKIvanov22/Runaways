@@ -143,4 +143,27 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
       }
   });
 
-  document.querySelector(".js-weekly-schedule").innerHTML = weeklyScheduleHTML;
+  let classInfoHTML = " ";
+
+  assignments.forEach((assignments)=>{
+    if(assignments.name === ""){
+      return;
+    }
+    else{
+      classInfoHTML += `
+      <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>${assignments.className}Information about class</p>
+              </div>
+      `
+      }
+  });
+
+  
+
+
+  document.querySelector(".js-card-container").innerHTML = classInfoHTML;
+
