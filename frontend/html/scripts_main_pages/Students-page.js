@@ -85,6 +85,7 @@ let weeklyScheduleAssignments = [
     id: 1,
     name: "Assignment 1",
     className: "9a",
+    teachersName: 'smth',
     description: "Something for description",
     dueDate: "01",
     dueMohth: "january",
@@ -93,6 +94,7 @@ let weeklyScheduleAssignments = [
     id: 2,
     name: "Assignment 2",
     className: "9b",
+    teachersName: 'smth',
     description: "Something for description",
     dueDate: "02",
     dueMohth: "january",
@@ -101,6 +103,7 @@ let weeklyScheduleAssignments = [
     id: 3,
     name: "Assignment 3",
     className: "9c",
+    teachersName: 'smth',
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
@@ -109,6 +112,7 @@ let weeklyScheduleAssignments = [
     id: 4,
     name: "Assignment 3",
     className: "9c",
+    teachersName: 'smth',
     description: "Something for description",
     dueDate: "04",
     dueMohth: "january",
@@ -117,6 +121,7 @@ let weeklyScheduleAssignments = [
     id: 5,
     name: "Assignment 3",
     className: "9c",
+    teachersName: 'smth',
     description: "Something for description",
     dueDate: "05",
     dueMohth: "january",
@@ -143,21 +148,74 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
       }
   });
 
+  document.querySelector(".js-weekly-schedule").innerHTML = weeklyScheduleHTML;
+
   let classInfoHTML = " ";
 
-  assignments.forEach((assignments)=>{
+  let ClassInfo = [
+    {
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 2,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 3,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    },{
+      classId: 1,
+      className: "9a",
+      teachersName: 'smth'
+    }];
+
+  ClassInfo.forEach((assignments)=>{
     if(assignments.name === ""){
       return;
     }
     else{
       classInfoHTML += `
       <div class="card">
-                <div class="card-user-info">
-                  <img src="images_main_pages/user icon.png" />
-                  <h2>Teachers.name</h2>
-                </div>
-                <p>${assignments.className}Information about class</p>
-              </div>
+        <div class="card-user-info">
+          <img src="images_main_pages/user icon.png" />
+          <h2>${assignments.teachersName}</h2>
+        </div>
+        <p>Class name: ${assignments.className}</p>
+      </div>
       `
       }
   });
