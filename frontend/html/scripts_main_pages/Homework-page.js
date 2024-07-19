@@ -19,7 +19,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 2,
     name: "Assignment 2",
@@ -27,7 +28,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 3,
     name: "Assignment 3",
@@ -35,7 +37,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 4,
     name: "Assignment 3",
@@ -43,7 +46,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 5,
     name: "Assignment 3",
@@ -51,7 +55,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 1,
     name: "Assignment 1",
@@ -59,7 +64,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 1,
     name: "Assignment 1",
@@ -67,7 +73,8 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2003",
+    finished: false
   },{
     id: 1,
     name: "Assignment 1",
@@ -75,11 +82,12 @@ let assignments = [
     description: "Something for description",
     dueDate: "03",
     dueMohth: "january",
-    dueYear: "2003"
+    dueYear: "2004",
+    finished: false
   }];
 
   assignments.forEach((assignments)=>{
-    if(assignments.name === ""){
+    if(assignments.name === "" || assignments.finished){
       return;
     }
     else{
