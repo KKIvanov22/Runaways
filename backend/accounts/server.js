@@ -12,7 +12,14 @@ const port = 5501;
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+const corsOptions = {
+    origin: 'http://127.0.0.1:5501',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    allowedHeaders: 'Content-Type,Authorization'
+};
+
+app.use(cors(corsOptions));
 
 const JWT_SECRET = process.env.JWT_SECRET || 'OTADEKTDySgCdhpbVMlb'; 
 
@@ -78,7 +85,11 @@ app.post('/login', async (req, res) => {
         const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
         res.cookie('userId', user.id, { httpOnly: true });
         res.cookie('token', token, { httpOnly: true });
-        res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/main.html' }); // Include redirectUrl and userId
+        if(user.role == "admin") {
+            res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/admin.html' }); 
+        } else {
+            res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/main.html' }); 
+        } 
     } catch (error) {
         console.error('Error during login:', error);
         res.status(400).json({ message: error.message });
@@ -105,7 +116,7 @@ app.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: 'This is a protected route', userId: req.userId, userRole: req.userRole });
 });
 
-app.get('/user-info', authMiddleware, async (req, res) => {
+app.get('/user-info', async (req, res) => {
     try {
         const user = await User.findById(req.userId);
         if (!user) {
@@ -114,6 +125,34 @@ app.get('/user-info', authMiddleware, async (req, res) => {
         res.json({ id: user.id, name: user.name, email: user.email });
     } catch (error) {
         console.error('Error fetching user info:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.get('/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.post('/update-user/:id', async (req, res) => {
+    try {
+        const { name, email, role } = req.body;
+        const { id } = req.params;
+
+        const updatedUser = await User.findByIdAndUpdate(id, { name, email, role }, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: 'User updated successfully' });
+    } catch (error) {
+        console.error('Error updating user:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
