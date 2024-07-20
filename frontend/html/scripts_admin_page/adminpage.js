@@ -23,11 +23,21 @@ async function fetchUsers() {
             userForm.action = `http://localhost:5501/update-user/${user._id}`;
             
             userForm.innerHTML = `
-                <input type="text" name="name" value="${user.name}" required>
-                <input type="email" name="email" value="${user.email}" required>
-                <input type="text" name="role" value="${user.role}" required>
-                <input type="hidden" name="id" value="${user._id}">
-                <button type="submit">Update</button>
+                <div class="activity-container assignment image-container"> 
+                <div class="overlay">
+                  <div class="homework-information">
+                    <h3 class="user-name">Name:</h3>
+                    <h3 class="user-email">Email:</h3>
+                    <h3 class="user-role">Role:</h3>
+                    <input type="text" class="input-user-name" name="name" value="${user.name}" required>
+                    <input type="email" class="input-user-email" name="email" value="${user.email}" required>
+                    <input type="text" id="roles" class="input-user-role" onfocus="showDropdown()" autocomplete="off" name="role" value="${user.role}" required>
+                    <input type="hidden" class="input-user-id" name="id" value="${user._id}">
+                    <button type="submit" class="btn-user-update">Update</button>
+                    <div class="icon-delete"></div>
+                 </div>
+                </div>
+              </div>
             `;
 
             usersContainer.appendChild(userForm);
