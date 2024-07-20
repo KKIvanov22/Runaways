@@ -44,14 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: loginData,
+                    credentials: "include"
                 });
-
+                
                 if (response.ok) {
                     const result = await response.json();
                     alert(result.message);
                     
-                    document.cookie = `token=${result.token}; path=/`;
-                    document.cookie = `userId=${result.userId}; path=/`;
+                    /*document.cookie = `token=${result.token}; path=/`;
+                    document.cookie = `userId=${result.userId}; path=/`;*/
 
                     if (result.redirectUrl) {
                         window.location.href = result.redirectUrl; 
