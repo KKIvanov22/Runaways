@@ -83,8 +83,8 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('userId', user.id, { httpOnly: true });
-        res.cookie('token', token, { httpOnly: true });
+        res.cookie('userId', user.id, { httpOnly: false,secure: true,path: '/',sameSite: "none" });
+        res.cookie('token', token, { httpOnly: false,secure: true,path: '/',sameSite: "none" });
         if(user.role == "admin") {
             res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/admin.html' }); 
         } else {
@@ -98,6 +98,8 @@ app.post('/login', async (req, res) => {
 
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
+    console.log(JSON.stringify(req.cookies.userId, null, 2));
+    console.log(JSON.stringify(req.cookies.token, null, 2));
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }
@@ -116,13 +118,16 @@ app.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: 'This is a protected route', userId: req.userId, userRole: req.userRole });
 });
 
-app.get('/user-info', async (req, res) => {
+app.get('/user-info', authMiddleware , async (req, res) => {
     try {
-        const user = await User.findById(req.userId);
+        
+        const user = await User.find({id: req.userId});
+        
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.json({ id: user.id, name: user.name, email: user.email });
+        console.log(user);
+        res.json(user);
     } catch (error) {
         console.error('Error fetching user info:', error);
         res.status(500).json({ message: 'Server error' });
@@ -158,5 +163,5 @@ app.post('/update-user/:id', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://127.0.0.1:${port}`);
 });
