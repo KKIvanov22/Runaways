@@ -264,6 +264,7 @@
     grid-template-columns:10% 30% 45% 15%;
     align-items: center;
     color: #484d53;
+    overflow-y: hidden;
   }
   .btn-user-update{
     grid-row: 1/2;
@@ -385,7 +386,51 @@
     font-size:medium;
     color: black;
     transform: translateY(-20px);
+    transform: translateY(470px);
   }
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+input:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #c7c3ff;
+    border-color: var(--borderOutline1);
+    border-width: 3px;
+    border-style: dashed;
+    border-radius: 20px;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 150px;
+    overflow-y: auto;
+    align-items: start;
+}
+
+.dropdown-content option {
+    color: black;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content option:hover {
+    background-color: #ddd;
+}
 
   
   @keyframes gelatine {
@@ -610,7 +655,7 @@
     }
       
       .right-content {
-          grid-template-rows: 4% 20% 76%;
+          grid-template-rows: 5%  95%;
           margin: 15px 15px 15px 0;
       }
   }
@@ -642,7 +687,7 @@
     }
   
     .right-content {
-      grid-template-rows: 4% 19% 36% 41%;
+      grid-template-rows: 5%  95%;
     }
   
     .card-two {
@@ -656,7 +701,7 @@
   
   @media (max-width: 1050px) {
        .right-content {
-        grid-template-rows: 4% 19% 37% 40%;
+        grid-template-rows: 5%  95%;
     }
   }
   
@@ -713,7 +758,7 @@
   
     .right-content {
       grid-area: rightContent;
-          grid-template-rows: 5% 40% 50%;
+      grid-template-rows: 5%  95%;
       margin: 15px 15px 0 15px;
       padding: 10px 0 0;
       gap: 15px;

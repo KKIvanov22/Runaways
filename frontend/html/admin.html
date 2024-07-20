@@ -46,35 +46,9 @@
           <div class="assignments">
             <h1>Manage Accounts⚙️</h1>
             <div class="activity-container assignments-list js-auto-html-homeworks">
-
-              <container class="activity-container assignment image-container"> 
-                <div class="overlay">
-                  <div class="homework-information">
-                    <!-- <h3 class="homework-name">Homework: ${assignments.name}</h3>
-                    <h3 class="homework-description">Description: ${assignments.description}</h3>
-                    <h3 class="class-name">Class: ${assignments.className}</h3>
-                    <button class="btn-homework">Open</button>
-                    <h3 class="homework-due-date">Due: ${assignments.dueDate} ${assignments.dueMohth} ${assignments.dueYear}</h3> -->
+              <div id="users-container"></div>
 
 
-                    <!--!!!!!! <div id="users-container"></div> !!!!!!-->
-
-                    <!-- It does not work now but it will!!! -->
-
-                    <h3 class="user-name">Name:</h3>
-                    <!-- <h3 class="homework-description">id</h3> -->
-                    <h3 class="user-email">Email:</h3>
-                    <h3 class="user-role">Role:</h3>
-
-
-                    <input type="text" class="input-user-name" name="name" value="${user.name}" required>
-                    <input type="email" class="input-user-email" name="email" value="${user.email}" required>
-                    <input type="text" class="input-user-role" name="role" value="${user.role}" required>
-                    <input type="hidden" class="input-user-id" name="id" value="${user._id}">
-                    <button type="submit" class="btn-user-update">Update</button>
-                 </div>
-                </div>
-              </container>
 
             </div>
           </div>
@@ -179,3 +153,25 @@
   <script src="scripts_main_pages/namechange.js"></script>
 </body>
 </html>
+
+
+
+<!-- <container class="activity-container assignment image-container"> 
+                <div class="overlay">
+                  <div class="homework-information">
+                    <h3 class="user-name">Name:</h3>
+                    <h3 class="user-email">Email:</h3>
+                    <h3 class="user-role">Role:</h3>
+                    <input type="text" class="input-user-name" name="name" value="${user.name}" required>
+                    <input type="email" class="input-user-email" name="email" value="${user.email}" required>
+                    <input type="text" id="roles" class="input-user-role" onfocus="showDropdown()" autocomplete="off" name="role" value="${user.role}" required>
+                    <div id="dropdown-content" class="dropdown-content">
+                      <option onclick="selectOption('student')">student</option>
+                      <option onclick="selectOption('teacher')">teacher</option>
+                      <option onclick="selectOption('admin')">admin</option>
+                    </div>
+                    <input type="hidden" class="input-user-id" name="id" value="${user._id}">
+                    <button type="submit" class="btn-user-update">Update</button>
+                 </div>
+                </div>
+              </container> -->
