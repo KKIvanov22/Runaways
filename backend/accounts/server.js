@@ -121,9 +121,9 @@ app.post('/update-user/:id', async (req, res) => {
     try {
         const { name, email, role } = req.body;
         const { id } = req.params;
-
+        console.log(id);
         const updatedUser = await User.findByIdAndUpdate(id, { name, email, role }, { new: true });
-
+        console.log(updatedUser);
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -155,14 +155,30 @@ app.post('/update-user/:id', async (req, res) => {
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
         }
-
-        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+        
+        res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
 
+app.delete('/delete-user/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);
