@@ -98,8 +98,7 @@ app.post('/login', async (req, res) => {
 
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
-    console.log(JSON.stringify(req.cookies.userId, null, 2));
-    console.log(JSON.stringify(req.cookies.token, null, 2));
+    
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }
@@ -116,32 +115,6 @@ const authMiddleware = (req, res, next) => {
 
 app.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: 'This is a protected route', userId: req.userId, userRole: req.userRole });
-});
-
-app.get('/user-info', authMiddleware , async (req, res) => {
-    try {
-        
-        const user = await User.find({id: req.userId});
-        
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        console.log(user);
-        res.json(user);
-    } catch (error) {
-        console.error('Error fetching user info:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-app.get('/users', async (req, res) => {
-    try {
-        const users = await User.find();
-        res.json(users);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
 });
 
 app.post('/update-user/:id', async (req, res) => {
@@ -161,6 +134,35 @@ app.post('/update-user/:id', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+app.get('/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.post('/update-user/:id', async (req, res) => {
+    try {
+        const { name, email, role } = req.body;
+        const { id } = req.params;
+
+        const updatedUser = await User.findOneAndUpdate(id, { name, email, role }, { includeResultMetadata: false });
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);

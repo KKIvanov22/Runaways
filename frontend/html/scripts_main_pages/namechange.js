@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        console.log(document.cookie);
         const response = await fetch('http://localhost:5501/user-info', {
             method: 'GET',
             headers: {
@@ -10,7 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         if (response.ok) {
             const userInfo = await response.json();
-            console.log(userInfo);
             document.getElementById('user-name').textContent = userInfo[0].name;
         } else {
             console.error('Failed to fetch user info');
