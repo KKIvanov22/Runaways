@@ -6,12 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            try {
-                const name = registerForm.querySelector('input[placeholder="Enter your Name"]').value;
-                const email = registerForm.querySelector('input[placeholder="Enter your Email"]').value;
-                const password = registerForm.querySelector('input[placeholder="Enter your Password"]').value;
-                const confirmPassword = registerForm.querySelector('input[placeholder="Confirm Password"]').value;
+            const name = registerForm.querySelector('input[placeholder="Enter your Name"]').value;
+            const email = registerForm.querySelector('input[placeholder="Enter your Email"]').value;
+            const password = registerForm.querySelector('input[placeholder="Enter your Password"]').value;
+            const confirmPassword = registerForm.querySelector('input[placeholder="Confirm Password"]').value;
 
+            if (password.length < 8) {
+                alert('Password needs to be at least 8 characters long');
+                return;
+            }
+
+            try {
                 const registerData = JSON.stringify({ name, email, password, confirmPassword });
 
                 const response = await fetch('http://localhost:5501/register', {
@@ -46,16 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: loginData,
                     credentials: "include"
                 });
-                
+
                 if (response.ok) {
                     const result = await response.json();
                     alert(result.message);
-                    
-                    /*document.cookie = `token=${result.token}; path=/`;
-                    document.cookie = `userId=${result.userId}; path=/`;*/
 
                     if (result.redirectUrl) {
-                        window.location.href = result.redirectUrl; 
+                        window.location.href = result.redirectUrl;
                     }
                 } else {
                     const errorResult = await response.json();
