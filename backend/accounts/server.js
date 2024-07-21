@@ -117,20 +117,16 @@ app.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: 'This is a protected route', userId: req.userId, userRole: req.userRole });
 });
 
-app.post('/update-user/:id', async (req, res) => {
+app.get('/user-info', authMiddleware , async (req, res) => {
     try {
-        const { name, email, role } = req.body;
-        const { id } = req.params;
-        console.log(id);
-        const updatedUser = await User.findByIdAndUpdate(id, { name, email, role }, { new: true });
-        console.log(updatedUser);
-        if (!updatedUser) {
+        const user = await User.find({id: req.userId});
+        if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
-        res.status(200).json({ message: 'User updated successfully' });
+        console.log(user);
+        res.json(user);
     } catch (error) {
-        console.error('Error updating user:', error);
+        console.error('Error fetching user info:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
