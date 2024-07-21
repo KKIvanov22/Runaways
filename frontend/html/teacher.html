@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers-page</title>
+    <link rel="stylesheet" href="styles_teacher_page/teacher.css">
+</head>
+<body>
+  
+        <div class="popup-window away out" id="popupwindow">
+          <div class="popup-page">
+            <div class="assignment-grid">
+                <h1>Create your assignment</h1>
+                <div class="assignment-content">
+                  <div class="input-assignment-info">
+                    <h2 class="popup-assignment-name">Assignment name:</h2>
+                    <h2 class="popup-assignment-class">Assign to class:</h2>
+                    <h2 class="popup-assignment-due-date">Assignment due date:</h2>
+                    <h3 class="popup-assignment-description">Description:</h3>
+                    <input class="popup-assignment-input-name" type="text">
+                    <input class="popup-assignment-input-class" type="text">
+                    <input class="popup-assignment-input-due-date" type="date">
+                    <input class="popup-assignment-input-description" type="text">
+                    <button class="btn-preview">Preview</button>
+
+                  </div>
+                </div>
+                <div class="exit-popup">
+                  <button class="btn-discard" id="close-popup">Discard</button>
+                  <button class="btn-submit" id="submit-popup">Submit</button>
+                </div>
+              </div>
+          </div>
+        </div> 
+      </div>
+
+
+
+    <main>
+     <nav class="main-menu">
+        <h1 ><img class="logo"  src="images_main_pages/choveche.png" /> Doma6no</h1>
+
+          <li class="nav-item active">
+            <b></b>
+            <b></b>
+            <a href="teacher.html">
+              <i><img class="img-homework" src="images_main_pages/homework icon.png"></i>
+              <span class="nav-text">Homework</span>
+            </a>
+          </li>
+          
+      </nav>
+      
+      <section class="content">
+        <div class="left-content">
+          <div class="assignments">
+            <h1>Assignments</h1>
+            <button id="popup" class="btn-addAssignment">Add Assignment ➕</button>
+            <div class="activity-container assignments-list js-auto-html-homeworks">
+
+              <container class="activity-container assignment image-container"> 
+                <div class="overlay">
+                  <div class="homework-information">
+                    <h3 class="homework-name">Homework: ${assignments.name}</h3>
+                    <h3 class="homework-description">Description: ${assignments.description}</h3>
+                    <h3 class="class-name">Class: ${assignments.className}</h3>
+                    <button class="btn-homework">Open</button>
+                    <h3 class="homework-due-date">Due: ${assignments.dueDate} ${assignments.dueMohth} ${assignments.dueYear}</h3>
+                 </div>
+                </div>
+              </container>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="right-content">
+          <div class="user-info">
+            <img src="images_main_pages/user icon.png" alt="user" />
+            <h4 id="user-name">User.name</h4>
+          </div>
+
+          <div class="classes">
+            <h1>Classes</h1>
+            <div class="card-container js-card-container">
+              
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+              <div class="card">
+                <div class="card-user-info">
+                  <img src="images_main_pages/user icon.png" />
+                  <h2>Teachers.name</h2>
+                </div>
+                <p>Class name: </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <script src="scripts_main_pages/namechange.js"></script>
+    <script src="scripts_teacher_page/Teacher-pageHTML.js"></script>
+</body>
+</html>
