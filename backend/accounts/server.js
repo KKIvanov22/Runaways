@@ -145,13 +145,13 @@ app.post('/update-user/:id', async (req, res) => {
     try {
         const { name, email, role } = req.body;
         const { id } = req.params;
-
-        const updatedUser = await User.findOneAndUpdate(id, { name, email, role }, { includeResultMetadata: false });
-
+        console.log(id);
+        const updatedUser = await User.findByIdAndUpdate(id, { name, email, role }, { new: true });
+        console.log(updatedUser);
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
         }
-        
+
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {
         console.error('Error updating user:', error);

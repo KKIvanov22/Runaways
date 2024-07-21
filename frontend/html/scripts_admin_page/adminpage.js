@@ -16,8 +16,10 @@ async function fetchUsers() {
         }
 
         const usersContainer = document.getElementById('users-container');
+        const teachersContainer = document.querySelector('.js-card-container');
 
         users.forEach(user => {
+            // Create user form for the main users container
             const userForm = document.createElement('form');
             userForm.method = 'POST';
             userForm.action = `http://localhost:5501/update-user/${user._id}`;
@@ -103,6 +105,19 @@ async function fetchUsers() {
             });
 
             usersContainer.appendChild(userForm);
+
+            // Create card for teachers container if user is a teacher
+            if (user.role === 'teacher') {
+                const teacherCard = document.createElement('div');
+                teacherCard.classList.add('card');
+                teacherCard.innerHTML = `
+                    <div class="card-user-info">
+                        <img src="images_main_pages/user icon.png" />
+                        <h2>${user.name}</h2>
+                    </div>
+                `;
+                teachersContainer.appendChild(teacherCard);
+            }
         });
     } catch (error) {
         console.error('Error fetching users:', error);
