@@ -71,13 +71,15 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
         ];
         const correctAnswer = formData.getAll(`correct-${i}`).map(Number)[0];
 
-        questions.push({ question, answers, correctAnswer, testName, testClass });
+        questions.push({ question, answers, correctAnswer });
     }
+
+    const data = { testName, testClass, questions };
 
     const response = await fetch('http://localhost:5501/submit-questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ questions })
+        body: JSON.stringify(data)
     });
 
     const result = await response.json();

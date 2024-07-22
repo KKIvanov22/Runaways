@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 5501;
+const { Schema } = mongoose;
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -40,13 +41,19 @@ const UserSchema = new mongoose.Schema({
     class: { type: String, default: 'no_class' }
 });
 
-const QuestionSchema = new mongoose.Schema({
+const QuestionSchema = new Schema({
     question: String,
     answers: [String],
-    correctAnswer: Number,
-    testName: String, 
-    testClass: String 
+    correctAnswer: Number
 });
+
+const TestSchema = new Schema({
+    testName: String,
+    testClass: String,
+    questions: [QuestionSchema]
+});
+
+const Test = mongoose.model('Test', TestSchema);
 
 const User = mongoose.model('User', UserSchema);
 const Question = mongoose.model('Question', QuestionSchema);
@@ -189,13 +196,15 @@ app.delete('/delete-user/:id', async (req, res) => {
 
 app.post('/submit-questions', async (req, res) => {
     try {
-        const { questions } = req.body;
+        const { testName, testClass, questions } = req.body;
         
         if (questions.length > 20) {
             return res.status(400).json({ message: 'Cannot submit more than 20 questions.' });
         }
 
-        await Question.insertMany(questions);
+        const test = new Test({ testName, testClass, questions });
+        await test.save();
+
         res.status(201).json({ message: 'Questions submitted successfully' });
     } catch (error) {
         console.error('Error submitting questions:', error);
