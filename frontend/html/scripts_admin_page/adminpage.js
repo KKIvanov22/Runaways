@@ -31,8 +31,10 @@ async function fetchUsers() {
                             <h3 class="user-name">Name:</h3>
                             <h3 class="user-email">Email:</h3>
                             <h3 class="user-role">Role:</h3>
+                            <h3 class="user-class">Class:</h3>
                             <input type="text" class="input-user-name" name="name" value="${user.name}" required>
                             <input type="email" class="input-user-email" name="email" value="${user.email}" required>
+                            <input type="text" class="input-user-class" name="class" value="${user.class || 'no_class'}" required>
                             <select name="role" class="input-user-role" required>
                                 <option value="student" ${user.role === 'student' ? 'selected' : ''}>Student</option>
                                 <option value="teacher" ${user.role === 'teacher' ? 'selected' : ''}>Teacher</option>
