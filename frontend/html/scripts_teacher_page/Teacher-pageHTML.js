@@ -28,3 +28,46 @@ let toggle = function() {
 popbutton.addEventListener('click', toggle);
 awaybutton.addEventListener('click', toggle);
 submitbutton.addEventListener('click', toggle);
+
+
+//Add question
+
+
+let QuestionsHTML =`<div  class="question">
+                    <h2 class="question-title">Question 1</h2>
+                    <textarea class="question-input" placeholder="Type your question"></textarea>
+                    <input class="question-right-answer" placeholder="Enter right answer">
+                  </div>`;
+document.querySelector(".questions-list").innerHTML = QuestionsHTML;
+
+let questionId = 2;
+let questionNumber =2;
+
+document.querySelector(".btn-add-question").addEventListener("click", ()=>{
+  QuestionsHTML = document.querySelector(".questions-list").innerHTML;
+  QuestionsHTML += `<div id="${questionId}" class="question">
+                    <h2 class="question-title">Question ${questionId}</h2>
+                    <textarea class="question-input" placeholder="Type your question"></textarea>
+                    <input class="question-right-answer" placeholder="Enter right answer">
+                    <div data-id ="${questionId}" class="icon-delete"></div>
+                  </div>`;
+  document.querySelector(".questions-list").innerHTML = QuestionsHTML;
+  questionId++;
+
+  document.querySelectorAll(".icon-delete").forEach((button) =>{
+    button.addEventListener("click", ()=>{
+      const buttonId = button.dataset.id;
+      document.getElementById(buttonId).remove();
+    });
+  });
+});
+
+// document.querySelectorAll(".icon-delete").forEach((question) =>{
+//   button.addEventListener("click", ()=>{
+//     if(question.dataset.id > buttonId){
+//       questionId--;
+//     }    
+//   });
+// });
+
+
