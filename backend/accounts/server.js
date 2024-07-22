@@ -36,10 +36,20 @@ const UserSchema = new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
     password: String,
-    role: { type: String, default: 'student' }
+    role: { type: String, default: 'student' },
+    class: { type: String, default: 'no_class' }
+});
+
+const QuestionSchema = new mongoose.Schema({
+    question: String,
+    answers: [String],
+    correctAnswer: Number,
+    testName: String, 
+    testClass: String 
 });
 
 const User = mongoose.model('User', UserSchema);
+const Question = mongoose.model('Question', QuestionSchema);
 
 app.post('/register', async (req, res) => {
     console.log('Received register request:', req.body);
@@ -68,7 +78,6 @@ app.post('/register', async (req, res) => {
     }
 });
 
-
 app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body);
     const { email, password } = req.body;
@@ -87,7 +96,10 @@ app.post('/login', async (req, res) => {
         res.cookie('token', token, { httpOnly: false,secure: true,path: '/',sameSite: "none" });
         if(user.role == "admin") {
             res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/admin.html' }); 
-        } else {
+        } else if(user.role == "teacher"){
+            res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/teacher.html' }); 
+        }
+        else {
             res.json({ message: 'Login successful', userId: user.id, token, redirectUrl: '/frontend/html/main.html' }); 
         } 
     } catch (error) {
@@ -111,7 +123,6 @@ const authMiddleware = (req, res, next) => {
         next();
     });
 };
-
 
 app.get('/protected', authMiddleware, (req, res) => {
     res.json({ message: 'This is a protected route', userId: req.userId, userRole: req.userRole });
@@ -143,10 +154,10 @@ app.get('/users', async (req, res) => {
 
 app.post('/update-user/:id', async (req, res) => {
     try {
-        const { name, email, role } = req.body;
+        const { name, email, role, class: userClass } = req.body; 
         const { id } = req.params;
         console.log(id);
-        const updatedUser = await User.findByIdAndUpdate(id, { name, email, role }, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(id, { name, email, role, class: userClass }, { new: true }); 
         console.log(updatedUser);
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
@@ -175,6 +186,23 @@ app.delete('/delete-user/:id', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+app.post('/submit-questions', async (req, res) => {
+    try {
+        const { questions } = req.body;
+        
+        if (questions.length > 20) {
+            return res.status(400).json({ message: 'Cannot submit more than 20 questions.' });
+        }
+
+        await Question.insertMany(questions);
+        res.status(201).json({ message: 'Questions submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting questions:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);

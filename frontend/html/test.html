@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>test creation</title>
+    <link rel="stylesheet" href="styles_admin_pages/Admin-page.css">
 </head>
 <body>
-    
+    <main>
+        <nav class="main-menu">
+            <h1><img class="logo" src="images_main_pages/choveche.png" /> Doma6no</h1>
+        </nav>
+        <div class="content">
+            <div class="left-content">
+                <div class="assignments">
+                    <div id="users-container" class="activity-container assignments-list">
+                        <!-- input buttons -->
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <input type="text" id="test-name" placeholder="Test Name" required>
+                            <input type="text" id="test-class" placeholder="Class" required>
+                            <div>
+                                <button id="new-question-btn">New Question</button>
+                                <button id="submit-btn">Submit</button>
+                            </div>
+                        </div>
+                        <!-- questions form -->
+                        <form id="question-form">
+                            <!-- the questions appeear here -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="user-info">
+                    <img src="images_main_pages/user icon.png" alt="user" />
+                    <h4 id="user-name">User.name</h4>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="scripts_main_pages/namechange.js"></script>
+    <script src="scripts_test_creation/test.js"></script>
 </body>
 </html>
