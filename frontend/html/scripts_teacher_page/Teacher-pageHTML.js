@@ -25,12 +25,39 @@ let toggle = function() {
   },250);
 }
 // Event listeners
-popbutton.addEventListener('click', toggle);
-awaybutton.addEventListener('click', toggle);
+popbutton.addEventListener('click', ()=>{
+  toggle();
+  AssignmentInformation={
+    name: "",
+    class:"",
+    dueDate:"",
+    description: "",
+    questions: [{
+      id: "1",
+      question: "",
+      rightAnswer: "",
+      answer: ""
+    }]
+  };
+
+  let QuestionsHTML =`<div id=1 class="question">
+<h2 class="question-title">Question 1</h2>
+<textarea class="question-input" placeholder="Type your question"></textarea>
+<input class="question-right-answer" placeholder="Enter right answer">
+</div>`;
+document.querySelector(".questions-list").innerHTML = QuestionsHTML;
+questionId = 2;
+});
+
+awaybutton.addEventListener('click',() => {
+  ClearInputData();
+  toggle();
+});
+
 submitbutton.addEventListener('click', toggle);
+
 //AssignmentInformation
 let AssignmentInformation={
-  id:"",
   name: "",
   class:"",
   dueDate:"",
@@ -122,6 +149,10 @@ submitbutton.addEventListener('click', ()=>{
     });
     
   }); 
+
+  console.log(JSON.stringify(AssignmentInformation));
+
+
   
   ClearInputData(); 
 });
@@ -154,3 +185,32 @@ function renderInputElements(questionsList) {
     
   });
 }
+
+
+
+
+
+
+//Dano da e neshto blizko do raboteshto
+/*document.addEventListener('DOMContentLoaded', () => {
+
+  submitbutton =  addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      try {
+          const AssignmentInfo = JSON.stringify(AssignmentInformation);
+
+          const response = await fetch('http://localhost:5501/AddAssignment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: AssignmentInfo,
+          });
+
+          const result = await response.json();
+          alert(result.message);
+      } catch (error) {
+          console.error('Error during submission:', error);
+      }
+  });
+
+});*/
