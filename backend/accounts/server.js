@@ -212,6 +212,15 @@ app.post('/submit-questions', async (req, res) => {
     }
 });
 
+app.get('/tests', async (req, res) => {
+    try {
+      const tests = await Test.find({}, 'testName');
+      res.json(tests);
+    } catch (error) {
+      console.error('Error fetching tests:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });  
 
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);

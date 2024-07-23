@@ -254,3 +254,42 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
 
   document.querySelector(".js-card-container").innerHTML = classInfoHTML;
 
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchUserInfoAndTests();
+  });
+  
+  async function fetchUserInfoAndTests() {
+    try {
+      const userResponse = await fetch('http://localhost:5501/user-info');
+      const user = await userResponse.json();
+      const userClass = user.class;
+  
+      const testsResponse = await fetch('http://localhost:5501/tests');
+      const tests = await testsResponse.json();
+  
+      const container = document.querySelector('.js-auto-html-homeworks');
+      container.innerHTML = ''; 
+  
+      tests.forEach(test => {
+        if (test.testClass === userClass) {
+          const testElement = document.createElement('container');
+          testElement.classList.add('activity-container', 'assignment', 'image-container');
+          testElement.innerHTML = `
+            <div class="overlay">
+              <div class="homework-information">
+                <h3 class="homework-name">Homework: ${test.testName}</h3>
+                <h3 class="homework-description">Description: </h3>
+                <h3 class="class-name">Class: </h3>
+                <button class="btn-homework">Open</button>
+                <h3 class="homework-due-date">Due: </h3>
+              </div>
+            </div>
+          `;
+          container.appendChild(testElement);
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching user info or tests:', error);
+    }
+  }
+  
