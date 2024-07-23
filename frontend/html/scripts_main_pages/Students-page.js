@@ -256,40 +256,88 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
 
   document.addEventListener('DOMContentLoaded', () => {
     fetchUserInfoAndTests();
+  
+    const modal = document.getElementById('myModal');
+    const span = document.getElementsByClassName('close')[0];
+    const submitBtn = document.querySelector('.submit-btn');
+  
+    span.onclick = function() {
+      modal.style.display = 'none';
+    }
+  
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+  
+    submitBtn.addEventListener('click', async () => {
+      await submitTest();
+    });
   });
   
   async function fetchUserInfoAndTests() {
     try {
       const userResponse = await fetch('http://localhost:5501/user-info');
-      const user = await userResponse.json();
-      const userClass = user.class;
+      const userInfo = await userResponse.json();
+      document.getElementById('user-name').textContent = userInfo.name;
   
       const testsResponse = await fetch('http://localhost:5501/tests');
       const tests = await testsResponse.json();
-  
-      const container = document.querySelector('.js-auto-html-homeworks');
-      container.innerHTML = ''; 
-  
-      tests.forEach(test => {
-        if (test.testClass === userClass) {
-          const testElement = document.createElement('container');
-          testElement.classList.add('activity-container', 'assignment', 'image-container');
-          testElement.innerHTML = `
-            <div class="overlay">
-              <div class="homework-information">
-                <h3 class="homework-name">Homework: ${test.testName}</h3>
-                <h3 class="homework-description">Description: </h3>
-                <h3 class="class-name">Class: </h3>
-                <button class="btn-homework">Open</button>
-                <h3 class="homework-due-date">Due: </h3>
-              </div>
-            </div>
-          `;
-          container.appendChild(testElement);
-        }
-      });
+      populateAssignments(tests);
     } catch (error) {
-      console.error('Error fetching user info or tests:', error);
+      console.error('Error fetching user info and tests:', error);
+    }
+  }
+  
+  function populateAssignments(tests) {
+    const assignmentsContainer = document.querySelector('.js-auto-html-homeworks');
+    tests.forEach(test => {
+      const assignmentElement = document.createElement('div');
+      assignmentElement.className = 'assignment-item';
+      assignmentElement.innerHTML = `
+        <h2>${test.testName}</h2>
+        <button class="btn-open-test" data-test-id="${test._id}">Open</button>
+      `;
+      assignmentsContainer.appendChild(assignmentElement);
+    });
+  
+    // Add event listeners to the dynamically added buttons
+    const openButtons = document.querySelectorAll('.btn-open-test');
+    openButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const testId = button.getAttribute('data-test-id');
+        await openTest(testId);
+      });
+    });
+  }
+  
+  async function openTest(testId) {
+    try {
+      const testResponse = await fetch(`http://localhost:5501/tests/${testId}`);
+      const test = await testResponse.json();
+  
+      const questionsContainer = document.getElementById('questions-container');
+      questionsContainer.innerHTML = ''; // Clear any existing questions
+  
+      test.questions.forEach((question, index) => {
+        const questionElement = document.createElement('form');
+        questionElement.className = 'question';
+        questionElement.innerHTML = `
+          <h3>${index + 1}. ${question.questionText}</h3>
+          ${question.answers.map((answer, i) => `
+            <label>
+              <input type="radio" name="question${index}" value="${i}">
+              ${answer}
+            </label>
+          `).join('')}
+        `;
+        questionsContainer.appendChild(questionElement);
+      });
+  
+      document.getElementById('myModal').style.display = 'block';
+    } catch (error) {
+      console.error('Error opening test:', error);
     }
   }
   

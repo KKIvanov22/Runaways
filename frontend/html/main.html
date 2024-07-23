@@ -9,8 +9,7 @@
 <body>
     <main>
       <nav class="main-menu">
-        <h1 ><img class="logo"  src="images_main_pages/choveche.png" /> Doma6no</h1>
-
+        <h1><img class="logo" src="images_main_pages/choveche.png" /> Doma6no</h1>
         <ul>
           <li class="nav-item active">
             <b></b>
@@ -20,7 +19,6 @@
               <span class="nav-text">Overview</span>
             </a>
           </li>
-
           <li class="nav-item">
             <b></b>
             <b></b>
@@ -29,7 +27,6 @@
               <span class="nav-text">Homework</span>
             </a>
           </li>
-
           <li class="nav-item">
             <b></b>
             <b></b>
@@ -46,16 +43,14 @@
           <div class="assignments">
             <h1>Assignments</h1>
             <div class="activity-container assignments-list js-auto-html-homeworks">
-              
+              <!-- Tests will be dynamically inserted here -->
             </div>
-            
           </div>
 
           <div class="left-bottom">
             <div class="weekly-schedule">
               <h1>Weekly Schedule</h1> <!--- shows last 4 due assignments --->
               <div class="calendar js-weekly-schedule">
-
                 <div class="day-and-activity activity-assignments">
                   <div class="day">
                     <h1>date</h1>
@@ -66,7 +61,6 @@
                   </div>
                   <button class="btn">Open</button>
                 </div>
-
               </div>
             </div>
 
@@ -75,17 +69,17 @@
               <div class="personal-bests-container">
                 <div class="best-item box-one">
                   <p>Best assignment score: </p>
-                  <img src="images_main_pages/Mark-A.webp"/> <!---  image --->
+                  <img src="images_main_pages/Mark-A.webp" /> <!---  image --->
                   <h2>number</h2>
                 </div>
                 <div class="best-item box-two">
                   <p>Highest assignment score: </p>
                   <h2>number</h2>
-                  <img src="images_main_pages/score.png"/><!---  image --->
+                  <img src="images_main_pages/score.png" /><!---  image --->
                 </div>
                 <div class="best-item box-three">
-                  <p>Assignments compleated: </p>
-                  <img src="images_main_pages/checked.png"/><!---  image --->
+                  <p>Assignments completed: </p>
+                  <img src="images_main_pages/checked.png" /><!---  image --->
                   <h2>number</h2>
                 </div>
               </div>
@@ -99,15 +93,15 @@
             <h4 id="user-name">User.name</h4>
           </div>
 
-          <div class="assignments-compleated">
-            <h1 style="align-self: flex-start">Assignments Compleated</h1>
-            <div class="assignments-compleated-container">
+          <div class="assignments-completed">
+            <h1 style="align-self: flex-start">Assignments Completed</h1>
+            <div class="assignments-completed-container">
               <div class="box" style="--i: 60%">
                 <div class="circle">
                   <h2>60<small>%</small></h2> <!--- percentage = taken from database or a micro service --->
                 </div>
               </div>
-              <div class="assignments-compleated-content">
+              <div class="assignments-completed-content">
                 <p><span>Today:</span> smth</p>
                 <p><span>This Week:</span> smth</p>
                 <p><span>This Month:</span> smth</p>
@@ -118,7 +112,6 @@
           <div class="classes">
             <h1>Classes</h1>
             <div class="card-container js-card-container">
-              
               <div class="card">
                 <div class="card-user-info">
                   <img src="images_main_pages/user icon.png" />
@@ -126,13 +119,24 @@
                 </div>
                 <p></p>
               </div>
-
             </div>
           </div>
         </div>
       </section>
     </main>
-  <script src="scripts_main_pages/Students-page.js"></script>
-  <script src="scripts_main_pages/namechange.js"></script>
+    
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="questions-container">
+          <!-- Questions will be dynamically inserted here -->
+        </div>
+        <button class="submit-btn">Submit</button>
+      </div>
+    </div>
+
+    <script src="scripts_main_pages/Homework-page.js"></script>
+    <script src="scripts_main_pages/Students-page.js"></script>
+    <script src="scripts_main_pages/namechange.js"></script>
 </body>
 </html>

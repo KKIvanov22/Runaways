@@ -228,13 +228,13 @@ app.post('/submit-questions', async (req, res) => {
 
 app.get('/tests', async (req, res) => {
     try {
-      const tests = await Test.find({}, 'testName');
+      const tests = await Test.find({});  
       res.json(tests);
     } catch (error) {
       console.error('Error fetching tests:', error);
       res.status(500).json({ message: 'Server error' });
     }
-  });  
+  });
 
 app.get('/tests/:id', async (req, res) => {
     try {
