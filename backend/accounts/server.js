@@ -47,13 +47,27 @@ const QuestionSchema = new Schema({
     correctAnswer: Number
 });
 
-const TestSchema = new Schema({
+const testSchema = new mongoose.Schema({
     testName: String,
     testClass: String,
-    questions: [QuestionSchema]
-});
+    questions: [
+      {
+        question: String,
+        answers: [String],
+        correctAnswer: String
+      }
+    ]
+  });
+  
 
-const Test = mongoose.model('Test', TestSchema);
+  const testAnswerSchema = new mongoose.Schema({
+    student: String,
+    test: String,
+    score: String
+  });
+
+  const Test = mongoose.model('Test', testSchema);
+  const TestAnswer = mongoose.model('TestAnswer', testAnswerSchema);
 
 const User = mongoose.model('User', UserSchema);
 const Question = mongoose.model('Question', QuestionSchema);
@@ -221,6 +235,31 @@ app.get('/tests', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   });  
+
+app.get('/tests/:id', async (req, res) => {
+    try {
+      const testId = req.params.id;
+      const test = await Test.findById(testId).populate('questions');
+      if (!test) {
+        return res.status(404).json({ message: 'Test not found' });
+      }
+      res.json(test);
+    } catch (error) {
+      console.error('Error fetching test:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
+  app.post('/submit-test', async (req, res) => {
+    try {
+      const { student, test, score } = req.body;
+      const testAnswer = new TestAnswer({ student, test, score });
+      await testAnswer.save();
+      res.status(201).json(testAnswer);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
 
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);

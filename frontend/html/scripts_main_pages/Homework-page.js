@@ -183,6 +183,24 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
 
   document.addEventListener('DOMContentLoaded', () => {
     fetchUserInfoAndTests();
+  
+    const modal = document.getElementById('myModal');
+    const span = document.getElementsByClassName('close')[0];
+    const submitBtn = document.querySelector('.submit-btn');
+  
+    span.onclick = function() {
+      modal.style.display = 'none';
+    }
+  
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+  
+    submitBtn.addEventListener('click', async () => {
+      await submitTest();
+    });
   });
   
   async function fetchUserInfoAndTests() {
@@ -190,6 +208,7 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
       const userResponse = await fetch('http://localhost:5501/user-info');
       const user = await userResponse.json();
       const userClass = user.class;
+      const userName = user.name;
   
       const testsResponse = await fetch('http://localhost:5501/tests');
       const tests = await testsResponse.json();
@@ -208,7 +227,7 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
                   <h3 class="homework-name">Homework: ${test.testName}</h3>
                   <h3 class="homework-description">Description: </h3>
                   <h3 class="class-name">Class: ${test.testClass}</h3>
-                  <button class="btn-homework">Open</button>
+                  <button class="btn-homework" data-test-id="${test._id}" data-user-name="${userName}">Open</button>
                   <h3 class="homework-due-date">Due: </h3>
                 </div>
               </div>
@@ -216,8 +235,105 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
             container.appendChild(testElement);
           }
         });
+  
+        const buttons = container.querySelectorAll('.btn-homework');
+        buttons.forEach(button => {
+          button.addEventListener('click', async (event) => {
+            const testId = event.target.getAttribute('data-test-id');
+            await openTestPopup(testId);
+          });
+        });
       });
     } catch (error) {
       console.error('Error fetching user info or tests:', error);
     }
   }
+  
+  async function openTestPopup(testId) {
+    try {
+      const response = await fetch(`http://localhost:5501/tests/${testId}`);
+      const test = await response.json();
+      const questionsContainer = document.getElementById('questions-container');
+  
+      questionsContainer.innerHTML = ''; // Clear any existing content
+  
+      test.questions.forEach((question, index) => {
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('question');
+        questionElement.innerHTML = `
+          <h3>${index + 1}. ${question.question}</h3>
+          <form>
+            ${question.answers.map(answer => `
+              <div>
+                <input type="radio" id="${answer}" name="question${index}" value="${answer}">
+                <label for="${answer}">${answer}</label>
+              </div>
+            `).join('')}
+          </form>
+        `;
+        questionsContainer.appendChild(questionElement);
+      });
+  
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'block';
+    } catch (error) {
+      console.error('Error fetching test questions:', error);
+    }
+  }
+  
+  async function submitTest() {
+    try {
+      const questionsContainer = document.getElementById('questions-container');
+      const forms = questionsContainer.querySelectorAll('form');
+      const answers = [];
+  
+      forms.forEach((form, index) => {
+        const selectedAnswer = form.querySelector('input[type="radio"]:checked');
+        if (selectedAnswer) {
+          answers.push({
+            questionIndex: index,
+            answer: selectedAnswer.value
+          });
+        }
+      });
+  
+      const testId = document.querySelector('.btn-homework[data-test-id]').getAttribute('data-test-id');
+      const userName = document.querySelector('.btn-homework[data-user-name]').getAttribute('data-user-name');
+      const testResponse = await fetch(`http://localhost:5501/tests/${testId}`);
+      const test = await testResponse.json();
+  
+      let score = 0;
+  
+      answers.forEach(answer => {
+        const question = test.questions[answer.questionIndex];
+        if (question.correctAnswer === answer.answer) {
+          score++;
+        }
+      });
+  
+      const submission = {
+        student: userName,
+        test: test.testName,
+        score: `${score}/${test.questions.length}`
+      };
+  
+      const response = await fetch('http://localhost:5501/submit-test', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(submission)
+      });
+  
+      if (response.ok) {
+        alert('Test submitted successfully');
+        document.getElementById('myModal').style.display = 'none';
+      } else {
+        alert('Error submitting test');
+      }
+    } catch (error) {
+      console.error('Error submitting test:', error);
+      alert('Error submitting test');
+    }
+  }
+  
