@@ -1,5 +1,5 @@
 const navItems = document.querySelectorAll(".nav-item");
-
+let testIdGlobal = "";
 navItems.forEach((navItem, i) => {
   navItem.addEventListener("click", () => {
     navItems.forEach((item, j) => {
@@ -205,26 +205,32 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
   
   async function fetchUserInfoAndTests() {
     try {
-      const userResponse = await fetch('http://localhost:5501/user-info');
+      const userResponse = await fetch('http://localhost:5501/user-info', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'           
+    });
       const user = await userResponse.json();
-      const userClass = user.class;
-      const userName = user.name;
+      const userClass = user[0].class;
+      const userName = user[0].name;
   
       const testsResponse = await fetch('http://localhost:5501/tests');
       const tests = await testsResponse.json();
-  
       const containers = document.querySelectorAll('.js-auto-html-homeworks');
       containers.forEach(container => {
-        container.innerHTML = ''; // Clear any existing content
+        container.innerHTML = ''; 
   
         tests.forEach(test => {
+          
           if (test.testClass === userClass) {
             const testElement = document.createElement('div');
             testElement.classList.add('activity-container', 'assignment', 'image-container');
             testElement.innerHTML = `
               <div class="overlay">
                 <div class="homework-information">
-                  <h3 class="homework-name">Homework: ${test.testName}</h3>
+                  <h3 class="homework-name">Homework: ${test.testName} - test</h3>
                   <h3 class="homework-description">Description: </h3>
                   <h3 class="class-name">Class: ${test.testClass}</h3>
                   <button class="btn-homework" data-test-id="${test._id}" data-user-name="${userName}">Open</button>
@@ -254,7 +260,7 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
       const response = await fetch(`http://localhost:5501/tests/${testId}`);
       const test = await response.json();
       const questionsContainer = document.getElementById('questions-container');
-  
+      testIdGlobal = test._id;
       questionsContainer.innerHTML = ''; // Clear any existing content
   
       test.questions.forEach((question, index) => {
@@ -292,21 +298,23 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
         if (selectedAnswer) {
           answers.push({
             questionIndex: index,
-            answer: selectedAnswer.value
+            answerIndex: Array.from(form.querySelectorAll('input[type="radio"]')).indexOf(selectedAnswer)
           });
         }
       });
   
-      const testId = document.querySelector('.btn-homework[data-test-id]').getAttribute('data-test-id');
+      const testId = testIdGlobal;
       const userName = document.querySelector('.btn-homework[data-user-name]').getAttribute('data-user-name');
       const testResponse = await fetch(`http://localhost:5501/tests/${testId}`);
       const test = await testResponse.json();
-  
+      
       let score = 0;
-  
+      console.log(testId);
       answers.forEach(answer => {
         const question = test.questions[answer.questionIndex];
-        if (question.correctAnswer === answer.answer) {
+        const correctAnswerIndex = question.answers.indexOf(question.correctAnswer);
+       
+        if (correctAnswerIndex+1 === answer.answerIndex) {
           score++;
         }
       });
@@ -335,5 +343,6 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
       console.error('Error submitting test:', error);
       alert('Error submitting test');
     }
+    testIdGlobal = "";
   }
   
