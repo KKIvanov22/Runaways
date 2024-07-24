@@ -1,0 +1,109 @@
+#check-grades-popup {
+    display: none;
+    position: fixed;
+    z-index: -1000; /* Default z-index */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#check-grades-popup.active {
+    display: block; /* Show when active */
+    z-index: 1000;  /* Change z-index when active */
+}
+
+#check-grades-popup h2 {
+    margin-top: 0;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px; /* Space between input and button */
+}
+
+#test-name-input {
+    flex: 1; /* Make input take available space */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#fetch-grades-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#fetch-grades-button:hover {
+    background-color: #45a049;
+}
+
+#test-attempts-container {
+    flex: 1; /* Take up remaining space */
+    margin-top: 20px;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+#check-grades-popup .btn-close {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: center; /* Center the close button at the bottom */
+    width: 100%;
+}
+
+#check-grades-popup .btn-close:hover {
+    background-color: #d32f2f;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-user-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.card-user-info img {
+    margin-right: 10px;
+}
+
+.card-user-info h2, .card-user-info p {
+    margin: 0;
+    padding-right: 10px;
+}
+
+.attempt {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.student-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.score-info {
+    margin-left: 20px;
+}

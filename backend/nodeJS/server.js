@@ -261,6 +261,17 @@ app.get('/tests/:id', async (req, res) => {
     }
   });
 
+  app.get('/test-attempts/:testName', async (req, res) => {
+    try {
+        const testName = req.params.testName;
+        console.log(testName);
+        const testAttempts = await TestAnswer.find({ test: testName });
+        res.json(testAttempts);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);
 });
