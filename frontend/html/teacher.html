@@ -22,7 +22,7 @@
                         <input class="popup-assignment-input-class" type="text">
                         <input class="popup-assignment-input-due-date" type="date">
                         <textarea class="popup-assignment-input-description" name="description"></textarea>
-                        <button class="btn-preview">Preview</button>
+                        <button class="btn-preview" id="preview-btn">Preview</button>
                         <button class="btn-add-question">Add question</button>
                     </div>
                     <div class="questions-list"></div>
@@ -34,6 +34,36 @@
             </div>
         </div>
     </div>
+
+      <!-- Preview page -->
+    <div class="preview-window away out" id="preview">
+      <div class="preview-page">
+        <div class="preview-grid">
+          <h1>Preview assignment</h1>
+          <div class="preview-content">     
+            <div class="preview-assignment-info">
+              <h3>Description: </h3>
+              <p class="preview-assignment-description"></p>
+            </div>
+          <div class="questions-list-preview">
+
+              <div class="question-preview">
+                <h2 class="question-title">Question ${questionNumber}</h2>
+                <p id="question-description" class="question-description-preview"></p>
+                <input class="question-answer" placeholder="Enter your answer">
+              </div>
+              
+            </div>
+            <div class="exit-popup">
+              <button class="btn-discard" id="close-ppreview-btn">Close Preview</button>
+            </div>         
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
     <!-- New Check Grades Pop-up -->
     <div id="check-grades-popup">

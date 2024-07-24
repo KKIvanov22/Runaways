@@ -10,13 +10,17 @@ navItems.forEach((navItem, i) => {
 });
 
 
-// Find buttons & page
+// Find buttons & page -popups
 let popbutton = document.getElementById('popup');
 let awaybutton = document.getElementById('close-popup');
 let submitbutton=document.getElementById('submit-popup');
 let popwindow = document.getElementById('popupwindow');
 
-// Functions
+let previewWindow = document.getElementById('preview');
+let closePreviewBtn =document.getElementById('close-ppreview-btn');
+let previewBtn =document.getElementById('preview-btn');
+
+// Functions -toggle popups
 let toggle = function() {
   popwindow.classList.toggle('pop-up');
   popwindow.classList.toggle('away');
@@ -24,7 +28,15 @@ let toggle = function() {
     popwindow.classList.toggle('out');
   },250);
 }
-// Event listeners
+
+let togglePreview = function() {
+  previewWindow.classList.toggle('pop-up');
+  previewWindow.classList.toggle('away');
+  setTimeout(function(){
+    previewWindow.classList.toggle('out');
+  },250);
+}
+// Event listeners -popups
 popbutton.addEventListener('click', ()=>{
   toggle();
   AssignmentInformation={
@@ -56,6 +68,12 @@ awaybutton.addEventListener('click',() => {
 
 submitbutton.addEventListener('click', toggle);
 
+previewBtn.addEventListener('click', togglePreview);
+closePreviewBtn.addEventListener('click',togglePreview);
+
+
+
+
 //AssignmentInformation
 let AssignmentInformation={
   name: "",
@@ -69,6 +87,8 @@ let AssignmentInformation={
     answer: ""
   }]
 };
+
+
 //First question
 
 let QuestionsHTML =`<div id=1 class="question">
@@ -79,26 +99,15 @@ let QuestionsHTML =`<div id=1 class="question">
 document.querySelector(".questions-list").innerHTML = QuestionsHTML;
 
 let questionId = 2;
+let questionsList = document.querySelector(".questions-list");
 
 document.querySelector(".btn-add-question").addEventListener("click", ()=>{
   
-  let questionsList = document.querySelector(".questions-list");
   
-  // Save the values of the existing questions
-  questionsList.querySelectorAll(".question").forEach((question)=>{
-    let questionText = question.querySelector(".question-input").value;
-    let rightAnswer = question.querySelector(".question-right-answer").value;
-    
-    AssignmentInformation.questions.forEach(obj => {
-      if (obj.id == question.id) {
-        obj.question = questionText;
-        obj.rightAnswer = rightAnswer;
-      }
-    });
-    
-  });
+  // Saves the values of the existing questions
+  SaveQuestionsInfo();
+
   //Add question
-  
   let addQuestionHTML = `<div id="${questionId}" class="question">
   <h2 class="question-title">Question ${questionId}</h2>
   <textarea class="question-input" placeholder="Type your question"></textarea>
@@ -127,7 +136,7 @@ document.querySelector(".btn-add-question").addEventListener("click", ()=>{
 
 
 
-
+//Saves document info
 submitbutton.addEventListener('click', ()=>{
   let _name = document.querySelector(".popup-assignment-input-name");
   let _description = document.querySelector(".popup-assignment-input-description");
@@ -152,10 +161,51 @@ submitbutton.addEventListener('click', ()=>{
 
   console.log(JSON.stringify(AssignmentInformation));
 
-
-  
   ClearInputData(); 
 });
+
+
+previewBtn.addEventListener('click', ()=>{
+
+  SaveQuestionsInfo();
+  _description = document.querySelector(".popup-assignment-input-description");
+  AssignmentInformation.description = _description.value;
+
+  document.querySelector(".preview-assignment-description").innerHTML=AssignmentInformation.description;
+
+  let questionNumber = 1;
+  let questionsPreviewHtml ='';
+
+  AssignmentInformation.questions.forEach(element => {
+
+    questionsPreviewHtml += `<div class="question-preview">
+                <h2 class="question-title">Question ${questionNumber}</h2>
+                <p id="question-description" class="question-description-preview">${element.question}</p>
+                <input class="question-answer" placeholder="Enter your answer">
+              </div>`;
+   questionNumber++;
+  });
+  document.querySelector(".questions-list-preview").innerHTML=questionsPreviewHtml;
+
+});
+
+
+// Saves the values of the existing questions
+function SaveQuestionsInfo() {
+  questionsList.querySelectorAll(".question").forEach((question) => {
+    let questionText = question.querySelector(".question-input").value;
+    let rightAnswer = question.querySelector(".question-right-answer").value;
+
+    AssignmentInformation.questions.forEach(obj => {
+      if (obj.id == question.id) {
+        obj.question = questionText;
+        obj.rightAnswer = rightAnswer;
+      }
+    });
+
+  });
+}
+
 //Clear all input fields in the popup
 function ClearInputData() {
   console.log(AssignmentInformation);
@@ -187,6 +237,7 @@ function renderInputElements(questionsList) {
 }
 
 
+//Endpoint
 document.addEventListener('DOMContentLoaded', () => {
 
   submitbutton =  addEventListener('submit', async (e) => {
