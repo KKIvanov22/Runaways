@@ -15,7 +15,7 @@ def check_node_installed():
 
 def start_node_server():
     # Determine the path to the Node.js server file
-    server_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backend/accounts/server.js')
+    server_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backend/nodeJS/server.js')
     
     # Check if server.js exists
     if not os.path.isfile(server_file):
