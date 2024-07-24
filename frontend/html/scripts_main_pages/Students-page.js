@@ -184,7 +184,7 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
 
   let classInfoHTML = " ";
 
-  let ClassInfo = [
+  /*let ClassInfo = [
     {
       classId: 1,
       className: "9a",
@@ -233,9 +233,9 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
       classId: 1,
       className: "9a",
       teachersName: 'smth'
-    }];
+    }];*/
 
-  ClassInfo.forEach((ClassInfo)=>{
+  /*ClassInfo.forEach((ClassInfo)=>{
     if(ClassInfo.name === ""){
       return;
     }
@@ -250,7 +250,7 @@ weeklyScheduleAssignments.forEach((weeklyassignments)=>{
       </div>
       `
       }
-  });
+  });*/
 
   document.querySelector(".js-card-container").innerHTML = classInfoHTML;
 

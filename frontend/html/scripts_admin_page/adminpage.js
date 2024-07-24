@@ -115,7 +115,7 @@ async function fetchUsers() {
                 teacherCard.innerHTML = `
                     <div class="card-user-info">
                         <img src="images_main_pages/user icon.png" />
-                        <h2>${user.name}</h2>
+                        <h2>${user.name} <span>(${user.class})</span></h2>
                     </div>
                 `;
                 teachersContainer.appendChild(teacherCard);

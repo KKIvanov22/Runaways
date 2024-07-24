@@ -111,7 +111,7 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
 
   let classInfoHTML = " ";
 
-  let ClassInfo = [
+  /*let ClassInfo = [
     {
       classId: 1,
       className: "9a",
@@ -160,9 +160,9 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
       classId: 1,
       className: "9a",
       teachersName: 'smth'
-    }];
+    }];*/
 
-  ClassInfo.forEach((ClassInfo)=>{
+  /*ClassInfo.forEach((ClassInfo)=>{
     if(ClassInfo.name === ""){
       return;
     }
@@ -177,7 +177,7 @@ document.querySelector(".js-auto-html-homeworks").innerHTML = assignmentsHTML;
       </div>
       `
       }
-  });
+  });*/
 
   document.querySelector(".js-card-container").innerHTML = classInfoHTML;
 
