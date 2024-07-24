@@ -187,12 +187,7 @@ function renderInputElements(questionsList) {
 }
 
 
-
-
-
-
-//Dano da e neshto blizko do raboteshto
-/*document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
   submitbutton =  addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -213,4 +208,4 @@ function renderInputElements(questionsList) {
       }
   });
 
-});*/
+});
