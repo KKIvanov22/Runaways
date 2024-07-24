@@ -133,11 +133,15 @@ const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
     
     if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
+        res.clearCookie('userId', { path: '/', sameSite: 'none', secure: true });
+        res.clearCookie('token', { path: '/', sameSite: 'none', secure: true });
+        return res.redirect('/index.html');
     }
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
-            return res.status(401).json({ message: 'Failed to authenticate token' });
+            res.clearCookie('userId', { path: '/', sameSite: 'none', secure: true });
+            res.clearCookie('token', { path: '/', sameSite: 'none', secure: true });
+            return res.redirect('/index.html');
         }
         req.userId = decoded.id;
         req.userRole = decoded.role;
@@ -270,6 +274,12 @@ app.get('/tests/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
+
+app.get('/logout', (req, res) => {
+    res.clearCookie('userId', { path: '/', sameSite: 'none', secure: true });
+    res.clearCookie('token', { path: '/', sameSite: 'none', secure: true });
+    res.redirect('/index.html');
 });
 
 app.listen(port, () => {
