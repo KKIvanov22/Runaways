@@ -72,6 +72,8 @@ const testSchema = new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 const Question = mongoose.model('Question', QuestionSchema);
 
+//accounts
+
 app.post('/register', async (req, res) => {
     console.log('Received register request:', req.body);
     const { name, email, password, confirmPassword } = req.body;
@@ -128,6 +130,14 @@ app.post('/login', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
+app.get('/logout', (req, res) => {
+    res.clearCookie('userId', { path: '/', sameSite: 'none', secure: true });
+    res.clearCookie('token', { path: '/', sameSite: 'none', secure: true });
+    res.redirect('/index.html');
+});
+
+//user management
 
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
@@ -212,6 +222,8 @@ app.delete('/delete-user/:id', async (req, res) => {
     }
 });
 
+//homework
+
 app.post('/submit-questions', async (req, res) => {
     try {
         const { testName, testClass, questions } = req.body;
@@ -276,11 +288,7 @@ app.get('/tests/:id', async (req, res) => {
     }
 });
 
-app.get('/logout', (req, res) => {
-    res.clearCookie('userId', { path: '/', sameSite: 'none', secure: true });
-    res.clearCookie('token', { path: '/', sameSite: 'none', secure: true });
-    res.redirect('/index.html');
-});
+
 
 app.listen(port, () => {
     console.log(`Server running on http://127.0.0.1:${port}`);
