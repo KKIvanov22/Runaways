@@ -134,7 +134,7 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
     res.clearCookie('userId', { path: '/', sameSite: 'none', secure: true });
     res.clearCookie('token', { path: '/', sameSite: 'none', secure: true });
-    res.redirect('/index.html');
+    res.redirect('http://127.0.0.1:5501/');
 });
 
 //user management
