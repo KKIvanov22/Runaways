@@ -642,8 +642,8 @@
     font-size: 1rem;
   }
   
-  .assignments-compleated-content p span {
-    font-weight: 700;
+  .assignments-compleated-content p {
+    font-weight: bold;
   }
   
   .box {
@@ -1072,3 +1072,13 @@
   .submit-btn:hover {
     background-color: #45a049;
   }
+
+  input[type="radio"] {
+    font: inherit;
+    width: 1.15em;
+    height: 1.15em;
+    transform: translateY(3px);
+  }
+
+
+  

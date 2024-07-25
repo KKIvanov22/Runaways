@@ -1,14 +1,10 @@
 
 :root{
-    --size: 2px;
     --siteName:#ffffff;
     --mainMenuBackground1: #594bc2;
     --mainMenuBackground2: #5000ac;
     --borderOutline1:#4c00ff;
     --borderOutline2:rgb(106, 44, 252);
-    --bgr-color: #e91e63;
-	  --ico-color: #4e0a21;
-  
   }
   
   *,
@@ -75,9 +71,6 @@
     font-family: Arial, Helvetica, sans-serif;
   }
   
-  /* .logo {
-    
-  } */
   
   .nav-item {
     position: relative;
@@ -197,9 +190,9 @@
     
   }
   .assignments-list{
-    max-height: 750px;
     max-width: 1fr;
-    overflow-y: auto;
+    min-height: 800px;
+    overflow: auto;
   }
 
   .assignments-list::-webkit-scrollbar {
@@ -221,28 +214,6 @@
     padding: 12px 16px;
     border-bottom: 1px solid #ddd;
     min-height: 127px;
-  }
-
-  .img-overview{
-    width: 30px;
-    margin-right: 22px;
-    align-items: center;
-    aspect-ratio: 1/1;
-    
-  }
-  .img-homework{
-    width: 30px;
-    margin-right: 15px;
-    align-items: center;
-    aspect-ratio: 1/1;
-    
-  }
-  .img-settings{
-    width: 30px;
-    margin-right: 17px;
-    align-items: center;
-    aspect-ratio: 1/1;
-    
   }
   
   .image-container {
@@ -270,7 +241,7 @@
     color: #484d53;
     overflow-y: hidden;
   }
-  .btn-user-update{
+  button{
     grid-row: 1/2;
     grid-column: 4/5;
     padding: 8px 24px;
@@ -296,104 +267,15 @@
       box-shadow: 0 3px 2px var(--mainMenuBackground2);
   }
 
-  .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-
-  }
-  
-  .overlay h3 {
-    margin-left: 15px;
-    color: #252525;;
-  }
-
-  .user-name{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    grid-row: 1/2;
-    grid-column: 1/2;
-  }
-
-  .user-email{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    grid-row: 2/3;
-    grid-column: 1/2;
-    
-  }
-  .user-role{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    grid-row: 3/4;
-    grid-column: 1/2;
-
-  } 
-
-  .input-user-name{
-    grid-row: 1/2;
-    grid-column: 2/3;
+  input{
+    margin: 3px;
     min-height: 26px;
     border-radius: 5px;
     border-color: var(--borderOutline2);
     border-width: 3px;
     border-style:solid;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    font-variant: small-caps;
     font-weight: bold;
   }
-
-  .input-user-email{
-    grid-row: 2/3;
-    grid-column: 2/3;
-    min-height: 26px;
-    border-radius: 5px;
-    border-color: var(--borderOutline2);
-    border-width: 3px;
-    border-style:solid;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    font-variant: small-caps;
-    font-weight: bold;
-  }
-
-  .input-user-role{
-    grid-row: 3/4;
-    grid-column: 2/3;
-    margin-bottom: 3px;
-    min-height: 26px;
-    border-radius: 5px;
-    border-color: var(--borderOutline2);
-    border-width: 3px;
-    border-style:solid;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    font-variant: small-caps;
-    font-weight: bold;
-
-  }
-
-  .input-user-class{
-    margin-left: 10px;
-    min-height: 26px;
-    max-width: 170px;
-    border-radius: 5px;
-    border-color: var(--borderOutline2);
-    border-width: 3px;
-    border-style:solid;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    font-variant: small-caps;
-    font-weight: bold;
-  }
-
-  .input-user-role option{
-    font-weight: bold;
-    border: none;
-  }
-
 
 
   input:focus {
@@ -402,89 +284,28 @@
     box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
   }
 
-  .icon-delete {
-    width: calc(var(--size) * 20);
-    height: calc(var(--size) * 20);
-    border: 0;
-    border-radius: 7px;
-    outline: none;
-    background: #a4c75a;
-    background: var(--bgr-color);
-    cursor: pointer;
-    position: relative;
-    grid-column: 4/5;
-    grid-row: 2/4;
-    justify-self: end;
-    margin-bottom: 5px;
-    margin-right: 20px;
+  label{
+    font-weight: bold;
   }
-  
-  .icon-delete:before {
-    background: 
-      linear-gradient(0deg, var(--ico-color) 0 calc(var(--size) * 1), #fff0 0 calc( 100% - calc(var(--size) * 1)), var(--ico-color) 0 100%), 
-      linear-gradient(90deg, var(--ico-color) 0 calc(var(--size) * 1), #fff0 0 calc( 100% - calc(var(--size) * 6)), var(--ico-color) 0 100%), 
-      linear-gradient(45deg, var(--ico-color) 0 calc(var(--size) * 2.35), #fff0 0 100%);
-    width: calc(var(--size) * 12);
-    height: calc(var(--size) * 6);
-    position: absolute;
-    content: "";
-    border-radius: calc(var(--size) * 1);
-    transform: rotate(-45deg);
-    top: calc(var(--size) * 6.5);
-    left: calc(var(--size) * 2);
-    transition: all 0.5s ease 0s;
+
+  input[type="checkbox"] {
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(10px);
   }
-  
-  .icon-delete:after {
-    left: calc(var(--size) * 2);
-    top: calc(var(--size) * 14.5);
-    width: calc(var(--size) * 16);
-    height: calc(var(--size) * 0.9);
-    position: absolute;
-    background: 
-      linear-gradient(90deg, var(--bgr-color) 0 45%, #fff0 0 50%, var(--ico-color) 0 100%), 
-      repeating-linear-gradient(90deg, var(--bgr-color) 0 3%, var(--ico-color) 0 6%);
-    background-position: 86% 0;
-    background-size: 200%;
-    transition: all 0.5s ease 0s;
-    border-radius: 1px;
-    content: "";
-    border-top: calc(var(--size) * 1) solid var(--bgr-color);
-    border-bottom: calc(var(--size) * 1) solid var(--bgr-color);
-    font-family: Arial, Helvetica, serif;
-    font-size: calc(var(--size) * 4);
-    text-align: center;
-    line-height: calc(var(--size) * 16);
-    color: var(--bgr-color);
-    text-shadow: -1px -1px 1px var(--ico-color), 1px 1px 1px var(--ico-color);
+
+  input[type="checkbox"]:focus {
+    border-color: #000;
+    box-shadow: none;
   }
-  
-  .icon-delete:hover {
-    --ico-color: #18222c;
-    transition: all 0.5s ease 0s;
-  }
-  
-  .icon-delete:hover:before {
-    left: calc(var(--size) * 4);
-  }
-  
-  .icon-delete:hover:after {
-    background-position: 73% 0;
-  }
-  
-  .icon-delete:active {
-    --ico-color: #fff;
-    transition: all 0.5s ease 0s;
-  }
-  
-  .icon-delete:active:before {
-    left: calc(var(--size) * 6);
-  }
-  
-  .icon-delete:active:after {
-    background-position: 60% 0;
-    color: white;
-  }
+
+
 
 
 
