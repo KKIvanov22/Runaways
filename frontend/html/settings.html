@@ -3,45 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles_main_pages/Students-page.css">
+    <title>Settings</title>
+    <link rel="stylesheet" href="styles_main_pages/settings.css">
+    
 </head>
 <body>
     <main>
-     <nav class="main-menu">
-        <h1 ><img class="logo"  src="images_main_pages/choveche.png" /> Doma6no</h1>
-
-        <ul>
-          <li class="nav-item">
-            <b></b>
-            <b></b>
-            <a href="main.html">
-              <i><img class="img-overview" src="images_main_pages/home icon.png"></i>
-              <span class="nav-text">Overview</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <b></b>
-            <b></b>
-            <a href="homework.html">
-              <i><img class="img-homework" src="images_main_pages/homework icon.png"></i>
-              <span class="nav-text">Homework</span>
-            </a>
-          </li>
-
-          <li class="nav-item active">
-            <b></b>
-            <b></b>
-            <a href="settings.html">
-              <i><img class="img-settings" src="images_main_pages/settings icon.png"></i>
-              <span class="nav-text">Settings</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-
+        <nav class="main-menu">
+            <h1><img class="logo" src="images_main_pages/choveche.png" /> Doma6no</h1>
+            <ul>
+                <li class="nav-item">
+                    <a href="main.html">
+                        <img class="img-overview" src="images_main_pages/home icon.png">
+                        <span class="nav-text">Overview</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="homework.html">
+                        <img class="img-homework" src="images_main_pages/homework icon.png">
+                        <span class="nav-text">Homework</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="settings.html">
+                        <img class="img-settings" src="images_main_pages/settings icon.png">
+                        <span class="nav-text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="settings-tabs">
+                <a href="#change-username" class="settings-tab" id="tab1">
+                    <img src="images_main_pages/username-photo.png" alt="Change Username">
+                </a>
+                <a href="#change-photo" class="settings-tab" id="tab2">
+                    <img src="images_main_pages/photo-icon.png" alt="Change Photo">
+                </a>
+                <a href="#change-theme" class="settings-tab" id="tab3">
+                    <img src="images_main_pages/theme-icon.png" alt="Change Theme">
+                </a>
+            </div>
+            <div class="settings-container">
+                <div class="settings-content" id="change-username">
+                    <h2>Change Username</h2>
+                    <input type="text" placeholder="New Username">
+                    <button>Save</button>
+                </div>
+                <div class="settings-content" id="change-photo">
+                    <h2>Change Photo</h2>
+                    <input type="file">
+                    <button>Upload</button>
+                </div>
+                <div class="settings-content" id="change-theme">
+                    <h2>Change Theme</h2>
+                    <select id="theme-select">
+                        <option value="light">Light Theme</option>
+                        <option value="dark">Dark Theme</option>
+                    </select>
+                    <button id="apply-theme">Apply</button>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="scripts_main_pages/namechange.js"></script>
+    <script src="scripts_teacher_page/Teacher-pageHTML.js"></script>
+    <script src="scripts_teacher_page/grades.js"></script>
+    <script src="scripts_main_pages/fetchteachers.js"></script>
+    <script src="/frontend/scripts/settings.js"></script>
 </body>
 </html>
